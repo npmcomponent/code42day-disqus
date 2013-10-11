@@ -3,9 +3,13 @@
   "repo": "code42day/disqus",
   "description": "Loads disqus threads",
   "version": "0.0.1",
-  "keywords": [],
-  "dependencies": {},
-  "development": {},
+  "keywords": [
+    "disqus"
+  ],
+  "dependencies": {
+    "code42day/dataset": "0.2.2",
+    "code42day/load": "1.0.0"
+  },
   "license": "MIT",
   "main": "index.js",
   "scripts": [
