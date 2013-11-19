@@ -22,27 +22,51 @@ function forEachParam(fn) {
   params.forEach(fn);
 }
 
-function disqus(opts) {
+
+function loadDisqus(script) {
+  if (!window.disqus_shortname) {
+    // at the minimum shortname needs to be defined
+    console.err('"shortname" parameter missing');
+    return;
+  }
+
+  load('//' + window.disqus_shortname + '.disqus.com/' + script);
+}
+
+function embed(opts) {
   var el = document.getElementById('disqus_thread'), ds;
   if (!el) {
     // nothing to do - no #disqus_thread element
     return;
   }
   ds = dataset(el);
-  // copy disqus vars to global namespace, opts values overwrite dataset values
+  // set params from dataset unless already set
   forEachParam(function(param) {
-    setParam(param, ds.get(param));
-    if (opts) {
-      setParam(param, opts[param]);
+    if (!opts || !opts[param]) {
+      setParam(param, ds.get(param));
     }
   });
-  if (!window.disqus_shortname) {
-    // at the minimum shortname needs to be defined
-    console.err('"shortname" parameter missing.');
+  loadDisqus('embed.js');
+}
+
+function count() {
+  var el = document.querySelector('a[href$="#disqus_thread"]');
+
+  if (!el) {
     return;
   }
+  loadDisqus('count.js');
+}
 
-  load('//' + window.disqus_shortname + '.disqus.com/embed.js', true);
+function disqus(opts) {
+  // copy disqus vars to global namespace
+  if (opts) {
+    forEachParam(function(param) {
+      setParam(param, opts[param]);
+    });
+  }
+  embed(opts);
+  count();
 }
 
 module.exports = disqus;
