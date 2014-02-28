@@ -1,5 +1,5 @@
-var load = require('load');
-var dataset = require('dataset');
+var load = require('code42day-load');
+var dataset = require('code42day-dataset');
 
 function setParam(key, value) {
   if (value) {

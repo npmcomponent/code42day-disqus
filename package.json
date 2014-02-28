@@ -1,0 +1,14 @@
+{
+  "name": "code42day-disqus",
+  "description": "Loads disqus threads",
+  "version": "1.2.0",
+  "keywords": [
+    "disqus"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "code42day-dataset": "git://github.com/npmcomponent/code42day-dataset.git",
+    "code42day-load": "git://github.com/npmcomponent/code42day-load.git"
+  },
+  "license": "MIT"
+}
